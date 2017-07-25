@@ -5,146 +5,29 @@
     <title></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="" href="./core/style.css">
+    <link rel="styleSheet" type="" href="./core/assets/style.css">
 </head>
 
 <body>
-    <canvas id="dan"></canvas>
+    <div id="main_stage">
+
+    </div>
+    <script src="./core/sdk/hilo-standalone.min.js"></script>
     <script src="./core/core.js"></script>
     <script>
-        var dan = new DAN({
-            dom: 'dan',
-            position: 'fullscreen',
+        new DAN({
+            position: 'top',
             list: [{
-                info: 'haha'
+                id: '1',
+                url: 'https://www.baidu.com',
+                name: '百度'
             }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
-            }, {
-                info: 'haha'
-            }, {
-                info: '我爱你中国'
+                id: '2',
+                url: 'https://www.google.com',
+                name: '谷歌'
             }]
         })
+        checkOptions()
     </script>
 </body>
 

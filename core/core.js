@@ -1,124 +1,121 @@
 ;
 (function() {
     /**
-     * 
-     * @param {*} options 
-     * 创建DAN
+     * 设置参数
      */
+    STAGE = null
+    TICKER = null
+    TEXT_CANVAS = null
+
+    SCREEN_WIDTH = window.innerWidth
+    SCREEN_HEIGHT = window.innerHeight
+
+
+    TEXT_POSITION_X = []
+    TEXT_POSITION_Y = []
+
+    /**
+     * 设置默认的配置选项
+     */
+    DEFAULT_OPTIONS = {
+        container: document.body,
+        position: 'top',
+        list: []
+    }
+
+
     var DAN = function(options) {
-        this.options = options
-        this.W_Width = window.innerWidth
-        this.W_Height = window.innerHeight
-        this.startDan()
+        this.options = checkOptions(options)
+        this.init()
     }
 
-    /**
-     * 初始化
-     */
-    DAN.prototype.startDan = function() {
-        this.initCanvas()
-        this.initDAN()
+    DAN.prototype.init = function() {
+        initStage(this.options.position, this.options.container)
+        initTicker()
+        this.draw()
     }
 
-    /**
-     * 初始化canvas
-     */
-    DAN.prototype.initCanvas = function() {
-        this.canvas = document.getElementById(this.options.dom)
-        this.CTX = this.canvas.getContext("2d")
-        this.canvas.setAttribute('width', this.W_Width)
-        switch (this.options.position) {
-            case 'top':
-                this.canvas.style.top = '0'
-                this.canvas.setAttribute('height', '400px')
-                break;
-            case 'center':
-                this.canvas.style.top = '50%'
-                this.canvas.setAttribute('height', '400px')
-                this.canvas.style.marginTop = '-200px'
-                break;
-            case 'bottom':
-                this.canvas.style.bottom = '0'
-                this.canvas.setAttribute('height', '400px')
-                break;
-            case 'fullscreen':
-                this.canvas.setAttribute('height', this.W_Height)
-                break;
-        }
 
-        this.CTX.strokeStyle = '#fff'
-
-        //保存当前环境
-        this.CTX.save()
-    }
-
-    /**
-     * 初始化弹幕
-     */
-    DAN.prototype.initDAN = function() {
-        var _ = this;
-        var INITX = [],
-            INITY = [],
-            PX
-        this.options.list.forEach(function(ele) {
-            PX = _.randomPosition()
-            INITX.push(PX.initX)
-            INITY.push(PX.initY)
+    DAN.prototype.draw = function() {
+        /**
+         * 根据文本画
+         */
+        RandomPosition(this.options.list)
+        this.options.list.forEach(function(ele, index) {
+            TextObject(ele, TEXT_POSITION_X[index], TEXT_POSITION_Y[index])
         })
 
-        /**
-         * 弹幕
-         */
-        setInterval(function() {
-            _.CTX.clearRect(0, 0, _.canvas.width, _.canvas.height)
-            _.CTX.save()
-            for (var i = 0; i < _.options.list.length; i++) {
-                INITX[i] -= 0.2 * 10
-                _.createText(INITX[i], INITY[i], _.options.list[i])
-                if (INITX[i] < -100) {
-                    INITX[i] = _.canvas.width
-                }
-            }
-            _.CTX.restore()
-        }, 50)
-
     }
-
 
     /**
-     * 初始化弹幕位置
+     * 
+     * @param {*检查options，设置默认值} params 
      */
-    DAN.prototype.createText = function(x, y, ele, index) {
-        this.CTX.lineWidth = 1;
-        this.CTX.font = "28px"
-        this.CTX.fillText(ele.info, x, y)
+    function checkOptions(options) {
+        for (var i in options) {
+            if (DEFAULT_OPTIONS[i]) {
+                DEFAULT_OPTIONS[i] = options[i]
+            }
+        }
+        return DEFAULT_OPTIONS
+    }
+
+    /**
+     * 
+     * @param {初始化舞台} position 
+     */
+    function initStage(position, container) {
+        if (container !== document.body) {
+            switch (position) {
+                case 'top':
+
+                    break;
+                case 'center':
+
+                    break;
+                case 'bottom':
+
+                    break;
+            }
+        } else {
+            STAGE = new Hilo.Stage({
+                container: document.body,
+                width: SCREEN_WIDTH,
+                height: SCREEN_HEIGHT
+            })
+        }
+    }
+
+    /**
+     * initTicker
+     */
+    function initTicker() {
+        TICKER = new Hilo.Ticker(60)
+        TICKER.addTick(STAGE)
+        TICKER.start()
     }
 
 
-    DAN.prototype.randomPosition = function() {
-        var initX,
-            initY
-        switch (this.options.position) {
-            case "top":
-                initX = Math.round(Math.random() * (this.W_Width - 100))
-                initY = Math.round(Math.random() * 380)
-                break;
-            case "center":
-                initX = Math.round(Math.random() * ((this.W_Width - 100) / 2 - 200))
-                initY = Math.round(Math.random() * 380)
-                break;
-            case "bottom":
-                initX = Math.round(Math.random() * (this.W_Height - 380))
-                initY = Math.round(Math.random() * 380)
-                break;
-            case "fullscreen":
-                initX = Math.round(Math.random() * (this.W_Width - 100))
-                initY = Math.round(Math.random() * this.W_Height)
-                break;
-        }
-        return {
-            initX: initX,
-            initY: initY
+    function TextObject(txtObj, PX, PY) {
+        console.log(PX, PY);
+        new Hilo.Text({
+            text: txtObj.name,
+            color: '#f00',
+            lineSpacing: 0,
+            x: PX,
+            y: PY
+        }).addTo(STAGE)
+    }
+
+
+    function RandomPosition(list) {
+        var X, Y
+        console.log(SCREEN_WIDTH, SCREEN_HEIGHT);
+        for (var i = 0; i < list.length; i++) {
+            X = Math.floor(Math.random() * SCREEN_WIDTH)
+            Y = Math.floor(Math.random() * (SCREEN_HEIGHT - 200))
+            TEXT_POSITION_X.push(X)
+            TEXT_POSITION_Y.push(Y)
         }
     }
     window.DAN = DAN
