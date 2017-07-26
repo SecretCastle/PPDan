@@ -9,25 +9,26 @@
 </head>
 
 <body>
-    <div id="main_stage">
 
-    </div>
     <script src="./core/sdk/hilo-standalone.min.js"></script>
-    <script src="./core/core.js"></script>
+    <script src="./core/init.js"></script>
+    <script src="./core/mapsite.js"></script>
     <script>
-        new DAN({
-            position: 'top',
-            list: [{
-                id: '1',
-                url: 'https://www.baidu.com',
-                name: '百度'
+        MapSite.init({
+            site: [{
+                line_x: 0.22,
+                line_y: 0.2,
+                name: 'atm',
+                width: 25 / 2,
+                height: 15 / 2
             }, {
-                id: '2',
-                url: 'https://www.google.com',
-                name: '谷歌'
+                line_x: 0.16,
+                line_y: 0.33,
+                name: 'department',
+                width: 526 / 2,
+                height: 78 / 2
             }]
         })
-        checkOptions()
     </script>
 </body>
 
