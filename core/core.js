@@ -42,7 +42,7 @@
          */
         RandomPosition(this.options.list)
         this.options.list.forEach(function(ele, index) {
-            TextObject(ele, TEXT_POSITION_X[index], TEXT_POSITION_Y[index])
+            TextObject(ele, TEXT_POSITION_X[index] - 10, TEXT_POSITION_Y[index], index)
         })
 
     }
@@ -92,25 +92,35 @@
     function initTicker() {
         TICKER = new Hilo.Ticker(60)
         TICKER.addTick(STAGE)
+        TICKER.addTick(Hilo.Tween)
         TICKER.start()
     }
 
 
     function TextObject(txtObj, PX, PY) {
-        console.log(PX, PY);
-        new Hilo.Text({
+        var _this = Hilo.Tween
+        _this.to(new Hilo.Text({
             text: txtObj.name,
             color: '#f00',
             lineSpacing: 0,
-            x: PX,
+            font: '30px Aril',
+            x: -PX,
             y: PY
-        }).addTo(STAGE)
+        }).addTo(STAGE), {
+            x: SCREEN_WIDTH
+        }, {
+            time: 10000,
+            loop: true,
+            onComplete: function() {
+                console.log(_this);
+
+            }
+        })
     }
 
 
     function RandomPosition(list) {
         var X, Y
-        console.log(SCREEN_WIDTH, SCREEN_HEIGHT);
         for (var i = 0; i < list.length; i++) {
             X = Math.floor(Math.random() * SCREEN_WIDTH)
             Y = Math.floor(Math.random() * (SCREEN_HEIGHT - 200))
@@ -118,5 +128,8 @@
             TEXT_POSITION_Y.push(Y)
         }
     }
+
+
+
     window.DAN = DAN
 })()
