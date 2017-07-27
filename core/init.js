@@ -21,7 +21,7 @@
          * 建立stage
          */
         initStage: function() {
-            this.stage = new Hilo.Stage({
+            this.stage = window.Map.stage = new Hilo.Stage({
                 renderType: 'canvas',
                 width: this.SCREEN_WIDTH,
                 height: this.SCREEN_HEIGHT,
@@ -29,6 +29,7 @@
                 scaleY: this.SCREEN_SCALE
             })
             document.body.appendChild(this.stage.canvas)
+            this.stage.enableDOMEvent([Hilo.event.POINTER_START, Hilo.event.POINTER_MOVE, Hilo.event.POINTER_END], true);
         },
         /**
          * 建立ticker
@@ -54,7 +55,7 @@
          */
         initSite: function() {
             this.config.site.forEach(function(ele) {
-                new Map.site(ele)
+                new Map.site(ele, this.SCREEN_WIDTH, this.SCREEN_HEIGHT)
             }, this);
 
         }
