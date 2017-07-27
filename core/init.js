@@ -37,6 +37,7 @@
         initTrcker: function(params) {
             this.TICKER = new Hilo.Ticker(60)
             this.TICKER.addTick(this.stage)
+            this.TICKER.addTick(Hilo.Tween)
             this.TICKER.start()
         },
         /**
@@ -57,7 +58,6 @@
             this.config.site.forEach(function(ele) {
                 new Map.site(ele, this.SCREEN_WIDTH, this.SCREEN_HEIGHT)
             }, this);
-
         }
     }
 
