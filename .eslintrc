@@ -1,0 +1,14 @@
+{   
+    "parserOptions": {        //语言选项
+        "ecmaVersion":6,
+        "sourceType": "module"
+    },
+    "parser": "babel-eslint",  //解析器
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "rules": {
+        "max-len": [1, 120, 2, {ignoreComments: true}],
+    }
+}

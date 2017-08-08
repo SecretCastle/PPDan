@@ -1,7 +1,7 @@
-(function(params) {
+(function() {
     var MapSite = window.Map = {
-        SCREEN_WIDTH: 720,
-        SCREEN_HEIGHT: 1180,
+        SCREEN_WIDTH: 1000,
+        SCREEN_HEIGHT: 1280,
         SCREEN_SCALE: 0.5,
         stage: null,
         bg: null,
